@@ -33,5 +33,7 @@ Faites un clic droit sur l'icône dans la barre des tâches pour accéder au men
 
 Le script gère automatiquement le cycle de vie du serveur.
 
+Puis vous aviez un fichier Commande.bat, c'est içi que vous pouvez faire des modifications sur les utilisateurs/rôles.
+
 ## 📝 Licence
 Ce projet est libre d'utilisation.
