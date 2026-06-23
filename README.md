@@ -1,134 +1,37 @@
-# Projet RBAC — Node.js + SQLite
+# 🚀 MonProjet - Serveur avec Gestion en Arrière-plan
 
-Système d'authentification avec gestion des rôles et permissions (RBAC) en Node.js, Express et SQLite.
+Ce projet permet de gérer un serveur Node.js localement avec une interface simplifiée dans la barre des tâches (System Tray) de Windows, permettant de démarrer ou d'arrêter le serveur en un clic.
 
----
+## 🛠️ Fonctionnalités
 
-## Prérequis
+* **Contrôle en arrière-plan :** Le serveur tourne de manière invisible sans fenêtre de terminal encombrante.
+* **Interface Tray :** Icône dans la barre des tâches (à côté de l'horloge) avec menu contextuel :
+    * **On :** Démarre le serveur.
+    * **Off :** Arrête proprement le processus Node.js.
+    * **Quitter :** Ferme l'application et arrête le serveur.
+* **Notifications :** Alertes visuelles lors du passage en mode "ON" ou "OFF".
+* **Installation automatique :** Vérification et installation automatique des dépendances (node_modules) au premier lancement.
 
-- [Node.js LTS](https://nodejs.org) installé sur votre machine
+## 📦 Installation
 
----
+1. **Cloner le dépôt :**
+   ```bash
+   git clone [https://github.com/YahiaCherifRyan/StockageUtilisateur.git](https://github.com/YahiaCherifRyan/StockageUtilisateur.git)
+   cd StockageUtilisateur
+## Prérequis :
 
-## Installation
+Assurez-vous d'avoir Node.js installé sur votre machine.
 
-```bash
-# 1. Cloner le repo
-git clone <url-du-repo>
-cd projet
+## Lancement :
 
-# 2. Installer les dépendances
-npm install
+Exécutez simplement le fichier Demarrage.bat.
 
-# 3. Lancer le serveur
-node server.js
-```
+Une icône apparaîtra dans votre zone de notification (cliquez sur la petite flèche près de l'horloge si elle n'est pas visible directement).
 
-Le site est accessible sur **http://localhost:3000**
+## ⚙️ Utilisation
+Faites un clic droit sur l'icône dans la barre des tâches pour accéder au menu.
 
-> La base de données `database.db` est créée automatiquement au premier lancement.  
-> Les rôles `admin` et `visiteur` sont insérés automatiquement.
+Le script gère automatiquement le cycle de vie du serveur.
 
----
-
-## CLI — Gestion via terminal
-
-Ouvrir un **second terminal** dans le dossier du projet, puis :
-
-### Utilisateurs
-
-```bash
-# Créer un utilisateur
-node cli.js create-user --username Ryan --password motdepasse --role admin
-node cli.js create-user --username Jean --password 12345 --role visiteur
-
-# Lister les utilisateurs
-node cli.js list-users
-
-# Supprimer un utilisateur
-node cli.js delete-user --username Jean
-```
-
-### Rôles
-
-```bash
-# Créer un rôle
-node cli.js create-role --nom moderateur --description "Modération du contenu"
-
-# Lister les rôles
-node cli.js list-roles
-
-# Supprimer un rôle (admin et visiteur sont protégés)
-node cli.js delete-role --nom moderateur
-```
-
-### Permissions
-
-```bash
-# Ajouter une permission à un rôle
-node cli.js add-permission --role moderateur --permission read
-node cli.js add-permission --role moderateur --permission delete
-
-# Retirer une permission
-node cli.js remove-permission --role moderateur --permission delete
-
-# Lister toutes les permissions
-node cli.js list-permissions
-
-# Lister les permissions d'un rôle spécifique
-node cli.js list-permissions --role moderateur
-```
-
-Permissions disponibles : `create`, `read`, `update`, `delete`
-
----
-
-## Structure du projet
-
-```
-projet/
-├── public/
-│   ├── index.html      → Page principale (tableau de bord)
-│   ├── login.html      → Page de connexion
-│   └── style.css       → Styles
-├── routes/
-│   └── auth.js         → Routes login / logout / session
-├── server.js           → Serveur Express
-├── database.js         → Initialisation SQLite
-├── cli.js              → Interface ligne de commande
-├── database.db         → Fichier BDD (généré automatiquement)
-└── package.json
-```
-
----
-
-## Base de données
-
-| Table | Description |
-|---|---|
-| `roles` | Les rôles disponibles (admin, visiteur, ...) |
-| `permissions` | Les permissions par rôle (create/read/update/delete) |
-| `users` | Les utilisateurs avec leur rôle |
-
-> Ajouter un nouveau rôle ou modifier des permissions ne nécessite **aucune modification du code**.
-
----
-
-## Sécurité
-
-- Mots de passe hashés avec **bcrypt** (salt rounds : 10)
-- Sessions côté serveur avec **express-session**
-- Vérification des permissions à chaque requête via la base de données
-- Clés étrangères SQLite activées
-
----
-
-## Démarrage rapide
-
-```bash
-npm install
-node server.js
-# Dans un autre terminal :
-node cli.js create-user --username admin --password admin123 --role admin
-# Ouvrir http://localhost:3000/login.html
-```
+## 📝 Licence
+Ce projet est libre d'utilisation.
