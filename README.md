@@ -24,6 +24,8 @@ Assurez-vous d'avoir Node.js installé sur votre machine.
 
 ## Lancement :
 
+Lorsque que vous décompresser le fichier, il faut renommer celui-ci en nom : projet
+
 Exécutez simplement le fichier Demarrage.bat.
 
 Une icône apparaîtra dans votre zone de notification (cliquez sur la petite flèche près de l'horloge si elle n'est pas visible directement).
