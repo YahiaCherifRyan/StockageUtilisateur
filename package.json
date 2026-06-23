@@ -1,0 +1,16 @@
+{
+  "name": "projet-rbac",
+  "version": "1.0.0",
+  "description": "Projet Node.js avec SQLite et système RBAC",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.18.2",
+    "express-session": "^1.18.0",
+    "minimist": "^1.2.8",
+    "node-sqlite3-wasm": "^0.8.27"
+  }
+}

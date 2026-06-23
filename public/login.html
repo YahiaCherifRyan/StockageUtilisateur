@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page">
+
+  <div class="auth-card">
+    <div class="auth-logo">🔐</div>
+    <h1>Connexion</h1>
+    <p class="auth-subtitle">Accédez à votre espace</p>
+
+    <div id="error-msg" class="alert alert-error" style="display:none;"></div>
+
+    <div class="form-group">
+      <label for="username">Nom d'utilisateur</label>
+      <input type="text" id="username" placeholder="Entrez votre identifiant" autocomplete="username">
+    </div>
+
+    <div class="form-group">
+      <label for="password">Mot de passe</label>
+      <input type="password" id="password" placeholder="Entrez votre mot de passe" autocomplete="current-password">
+    </div>
+
+    <button class="btn btn-primary" id="login-btn">Se connecter</button>
+  </div>
+
+  <script>
+    document.getElementById('login-btn').addEventListener('click', async () => {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      const errorMsg = document.getElementById('error-msg');
+
+      errorMsg.style.display = 'none';
+
+      if (!username || !password) {
+        errorMsg.textContent = 'Veuillez remplir tous les champs.';
+        errorMsg.style.display = 'block';
+        return;
+      }
+
+      const btn = document.getElementById('login-btn');
+      btn.disabled = true;
+      btn.textContent = 'Connexion...';
+
+      try {
+        const res = await fetch('/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          window.location.href = '/index.html';
+        } else {
+          errorMsg.textContent = data.message || 'Erreur de connexion.';
+          errorMsg.style.display = 'block';
+        }
+      } catch {
+        errorMsg.textContent = 'Impossible de joindre le serveur.';
+        errorMsg.style.display = 'block';
+      }
+
+      btn.disabled = false;
+      btn.textContent = 'Se connecter';
+    });
+
+    // Connexion avec Entrée
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') document.getElementById('login-btn').click();
+    });
+  </script>
+</body>
+</html>
